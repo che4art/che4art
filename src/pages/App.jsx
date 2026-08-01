@@ -94,6 +94,7 @@ const App = () => {
                   nsfw<br />
                   furry<br />
                   realism<br />
+                  fetish<br />
                   ask if unsure
                 </InterfaceSite>
 

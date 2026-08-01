@@ -71,7 +71,7 @@ const dialogue = [
   "that's it",
 "no more messenges",
 "i'm done with you",
-">:[",
+"",
 ];
 
 export default function BrokenButton() {
