@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import InterfaceSite from "../components/InterfaceSite";
 import AudioPlayer from "../components/AudioPlayer";
-import BrokenButton from "../components/brokenbutton";
+import BrokenButton from "../components/brokenButton";
 
 
 const App = () => {
