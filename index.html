@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>che4</title>
+    <style>
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.scale-wrapper {
+  width: 1440px;          /* tamanho base do site */
+  transform-origin: top center;
+  margin: 0 auto;
+}
+
+      .border-ui{
+          border: 4px solid rgb(142, 248, 142);
+          outline: 4px solid rgb(75, 37, 87);
+          background-color: rgb(75, 37, 87);
+          display: inline-block;
+  max-width: fit-content;
+      }
+
+.pixelify-sans {
+  font-family: "Pixelify Sans", sans-serif;
+  font-weight: 1700;
+  font-style: normal;
+}
+
+body {
+  background-image:url(fundo_gamer.png) ;
+   cursor: url("/cursor/default.png") 16 16, auto;
+}
+
+p{
+  font-size: 30px;
+}
+
+.container-relative{
+  position:relative;
+}
+
+.c4-1 {
+  position: absolute;
+  top: 0%;
+  right: 12%;
+  left: 60%;
+  color: white;
+  z-index: 1;
+  width: 370px;
+  height: 400px;
+}
+
+.c4-2 {
+  position: absolute;
+  top: 6%;
+  right: 63%;
+
+  color: white;
+  z-index: 1;
+  width: 500px;
+  height: 400px;
+  cursor: url("/cursor/pointing.png") 16 16, auto;
+}
+
+.c4-2:hover {
+  z-index: 1;
+  width: 505px;
+  height: 405px;
+  cursor: url("/cursor/pointing.png") 16 16, auto;
+}
+
+
+
+
+.img-d {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+.player {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.5s ease forwards;
+  cursor: url("/cursor/pointing.png") 16 16, auto;
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
