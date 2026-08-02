@@ -3,6 +3,7 @@ import { useRef } from "react";
 import InterfaceSite from "../components/InterfaceSite";
 import AudioPlayer from "../components/AudioPlayer";
 import BrokenButton from "../components/brokenButton";
+import ImageViewer from "../components/Imageviewer";
 
 
 const App = () => {
@@ -72,8 +73,8 @@ const App = () => {
                 </InterfaceSite>
 
                 <InterfaceSite>
-                  <div className="d-flex justify-content-center gap-4">
-                    <img src="/no_wegas.png" alt="" className="img-fluid w-50" />
+                  <div className="d-flex justify-content-center gap-4 ">
+                    <ImageViewer    src="/arts-img/lurien.png" className="img-fluid w-50"/>
                     <img src="/no_wegas.png" alt="" className="img-fluid w-50" />
 
                   </div>
