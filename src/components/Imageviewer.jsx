@@ -4,6 +4,8 @@ import InterfaceSite from "./InterfaceSite";
 export default function ImageViewer({
   src,
   alt = "",
+    title = "",
+  description = "",
   className = "",
   style = {},
 }) {
@@ -121,7 +123,7 @@ export default function ImageViewer({
                 userSelect: "none",
               }}
             >
-              <span  style={{padding: "0 15px"}}> Artwork Viewer</span>
+              <span  style={{padding: "0 15px"}}> {title || "Artwork Viewer"}</span>
 
               <button
                 onClick={closeViewer}
@@ -144,8 +146,8 @@ export default function ImageViewer({
               </button>
             </div>
 
-            {/* Área da imagem */}
-        {/* Área da imagem */}
+         
+       {/* Área da imagem */}
 <div
   onWheel={handleWheel}
   onMouseMove={handleMouseMove}
@@ -180,6 +182,22 @@ export default function ImageViewer({
     }}
   />
 </div>
+
+{/* Texto inferior */}
+{description && (
+  <div
+    style={{
+      padding: "15px",
+      textAlign: "center",
+      borderTop: "1px solid rgba(255, 255, 255, 0.23)",
+      background: "rgba(0, 0, 65, 0.2)",
+      color: "white",
+      fontSize: "15px",
+    }}
+  >
+    {description}
+  </div>
+)}
           </div>
         </div>
       )}

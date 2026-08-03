@@ -58,24 +58,28 @@ const App = () => {
                 <InterfaceSite>
                   <p>
                     my Interests now<br />
-                    vocaloid<br />
-                    hollow knight<br />
-                    jamiroquai<br />
-                    bad things<br /> 
+                    Vocaloid<br />
+                    Deltarune<br />
+                    Jamiroquai<br />
+                    Hollow knight<br /> 
                   </p>
                 </InterfaceSite>
                 <br />
 
                 <InterfaceSite>
                   <p>
-                    so i have 2 diferents art styles
+                    i have 2 diferents art styles
                   </p>
                 </InterfaceSite>
 
                 <InterfaceSite>
-                  <div className="d-flex justify-content-center gap-4 ">
-                    <ImageViewer    src="/arts-img/lurienPixel.png" className="img-fluid w-50"/>
-                    <ImageViewer    src="/arts-img/lurienPaint.png" className="img-fluid w-50"/>
+                  <div className="d-flex justify-content-center gap-2 ">
+                    <ImageViewer    src="/arts-img/lurienPixel.png" className="img-fluid w-50 "
+                      title="Lurien"
+                   description="Art of my character Lurien, created to compare the pixel art style with digital painting style."/>
+                    <ImageViewer    src="/arts-img/lurienPaint.png" className="img-fluid w-50"
+                        title="Lurien"
+                   description="Art of my character Lurien, created to compare the pixel art style with digital painting style."/>
                   </div>
                 </InterfaceSite>
 
@@ -91,11 +95,13 @@ const App = () => {
                 <br />
                 <InterfaceSite>
                   <h2>DONT'S</h2><br />
+                  <p>
                   nsfw<br />
                   furry<br />
                   realism<br />
                   fetish<br />
                   ask if unsure
+                  </p>
                 </InterfaceSite>
 
                 <InterfaceSite>

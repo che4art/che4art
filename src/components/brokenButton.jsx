@@ -3,7 +3,6 @@ import { useState } from "react";
 const dialogue = [
   "Broken Button",
   "Broken Button",
-   "Broken Button",
   ".",
   "..",
   "...",
@@ -40,14 +39,15 @@ const dialogue = [
   "...",
   "bro",
   "i swear",
+  "TO GOD",
   "STOP",
   "STOP",
   "CLICKING",
-  "CLICKINGG",
-  "CLICKINGGG",
-  "CLICKINGGGG",
-  "CLICKINGGGGG",
-  "CLICKINGGGGGG",
+  "CLICKING",
+  "CLICKING",
+  "CLICKING",
+  "CLICKING",
+  "CLICKING",
   "...",
   "...",
   "...",
@@ -91,6 +91,7 @@ export default function BrokenButton() {
        cursor: 'url("/cursor/pointing.png"), pointer',
        backgroundColor: "transparent",
        color: "white",
+      fontSize: "2vw"
 
       }}
     >
