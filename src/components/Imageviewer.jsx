@@ -101,8 +101,7 @@ export default function ImageViewer({
               maxWidth: "1600px",
               maxHeight: "900px",
 
-              background: "#3e0b53",
-
+              background: "linear-gradient(180deg, #150443, #2b0d7e, #7e2794)",
               border: "2px solid white",
 
               display: "flex",
@@ -115,18 +114,14 @@ export default function ImageViewer({
             <div
               style={{
                 height: "45px",
-                background: "#255b65",
-
+              background: "linear-gradient(180deg, #4bb9ae, #6baada, #6b8eda,  #5c51de)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-
-                padding: "0 15px",
-
                 userSelect: "none",
               }}
             >
-              <span>Artwork Viewer</span>
+              <span  style={{padding: "0 15px"}}> Artwork Viewer</span>
 
               <button
                 onClick={closeViewer}
@@ -134,20 +129,18 @@ export default function ImageViewer({
                   width: "5vh",
                   height: "5vh",
 
-                  border: "none",
+                  border: "1px solid #fdfcfd",
 
                   cursor: 'url("/cursor/pointing.png"), pointer',
 
                   fontSize: "18px",
 
-                  background: "transparent",
+                  color: "#ffffff",
 
-                  color: "red",
-
-                  backgroundColor:"red",
+                  background: "linear-gradient(180deg, #ff1919, #a030bc)",
                 }}
-              >
-                ✕
+              > 
+               <b>✕</b>  
               </button>
             </div>
 

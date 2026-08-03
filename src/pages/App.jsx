@@ -74,9 +74,8 @@ const App = () => {
 
                 <InterfaceSite>
                   <div className="d-flex justify-content-center gap-4 ">
-                    <ImageViewer    src="/arts-img/lurien.png" className="img-fluid w-50"/>
-                    <img src="/no_wegas.png" alt="" className="img-fluid w-50" />
-
+                    <ImageViewer    src="/arts-img/lurienPixel.png" className="img-fluid w-50"/>
+                    <ImageViewer    src="/arts-img/lurienPaint.png" className="img-fluid w-50"/>
                   </div>
                 </InterfaceSite>
 
