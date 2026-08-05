@@ -3,7 +3,7 @@ import { useRef } from "react";
 import InterfaceSite from "../components/InterfaceSite";
 import AudioPlayer from "../components/AudioPlayer";
 import BrokenButton from "../components/brokenButton";
-import ImageViewer from "../components/Imageviewer";
+import ImageViewer from "../components/ImageViewer";
 import GalleryViewer from "../components/GalleryViewer";
 
 
