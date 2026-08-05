@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ImageViewer from "./ImageViewer";
+import ImageViewer2 from "./ImageViewer2";
 import InterfaceSite from "./InterfaceSite"; // ajuste o caminho conforme a localização real do componente
 
 const cursorPointer = 'url("/cursor/pointing.png"), pointer';
@@ -133,7 +133,7 @@ export default function GalleryViewer() {
 
                         {/* Arte */}
                         
-                        <ImageViewer
+                        <ImageViewer2 
                             src={active.src}
                             title={active.title}
                             description={active.description}
