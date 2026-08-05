@@ -4,6 +4,7 @@ import InterfaceSite from "../components/InterfaceSite";
 import AudioPlayer from "../components/AudioPlayer";
 import BrokenButton from "../components/brokenButton";
 import ImageViewer from "../components/Imageviewer";
+import GalleryViewer from "../components/GalleryViewer";
 
 
 const App = () => {
@@ -61,7 +62,7 @@ const App = () => {
                     Vocaloid<br />
                     Deltarune<br />
                     Jamiroquai<br />
-                    Hollow knight<br /> 
+                    Hollow knight<br />
                   </p>
                 </InterfaceSite>
                 <br />
@@ -74,12 +75,12 @@ const App = () => {
 
                 <InterfaceSite>
                   <div className="d-flex justify-content-center gap-2 ">
-                    <ImageViewer    src="/arts-img/lurienPixel.png" className="img-fluid w-50 "
-                      title="Lurien"
-                   description="Art of my character Lurien, created to compare the pixel art style with digital painting style."/>
-                    <ImageViewer    src="/arts-img/lurienPaint.png" className="img-fluid w-50"
-                        title="Lurien"
-                   description="Art of my character Lurien, created to compare the pixel art style with digital painting style."/>
+                    <ImageViewer src="/arts-img/lurienPixel.png" className="img-fluid w-50 "
+                      title="Lurien in Pixel art"
+                      description="Art of my character Lurien, created to compare the pixel art style with digital painting style." />
+                    <ImageViewer src="/arts-img/lurienPaint.png" className="img-fluid w-50"
+                      title="Lurien in digital style"
+                      description="Art of my character Lurien, created to compare the pixel art style with digital painting style." />
                   </div>
                 </InterfaceSite>
 
@@ -94,20 +95,50 @@ const App = () => {
                 </InterfaceSite>
                 <br />
                 <InterfaceSite>
-                  <h2>DONT'S</h2><br />
-                  <p>
-                  nsfw<br />
-                  furry<br />
-                  realism<br />
-                  fetish<br />
-                  ask if unsure
-                  </p>
+                  <div className="d-flex">
+
+                    <div
+                      className="border-end border-white"
+                      style={{
+                        width: "50%",
+                        padding: "20px",
+                        textAlign: "center",
+                      }}
+                    >
+                      <h2>DO</h2>
+
+                      <p>
+                        character reference sheet<br />
+                        heavy gore<br />
+                        Kemonomimi <br />
+                        ask if unsure
+                      </p>
+                    </div>
+
+                    <div
+                      style={{
+                        width: "50%",
+                        padding: "20px",
+                        textAlign: "center",
+                      }}
+                    >
+                      <h2>DON'TS</h2>
+
+                      <p>
+                        nsfw<br />
+                        realism<br />
+                        fetish<br />
+                        furry (anthropomorphic animals)<br />
+                        ask if unsure
+                      </p>
+                    </div>
+
+                  </div>
                 </InterfaceSite>
 
-                <InterfaceSite>
-                  some arts: <br />
-                  <img src="/no_wegas.png" alt="" />
-                </InterfaceSite>
+
+
+                <GalleryViewer />
 
                 <br /><br />
 
