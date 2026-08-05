@@ -78,7 +78,7 @@ const App = () => {
                     <ImageViewer src="/arts-img/lurienPixel.png" className="img-fluid w-50 "
                       title="Lurien in Pixel art"
                       description="Art of my character Lurien, created to compare the pixel art style with digital painting style." />
-                    <ImageViewer src="/arts-img/lurienPaint.png" className="img-fluid w-50"
+                    <ImageViewer src="/arts-img/lurienPaint.webp" className="img-fluid w-50"
                       title="Lurien in digital style"
                       description="Art of my character Lurien, created to compare the pixel art style with digital painting style." />
                   </div>

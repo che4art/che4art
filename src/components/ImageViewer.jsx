@@ -27,15 +27,36 @@ export default function ImageViewer({
     };
   }, []);
 
-  function openViewer() {
-    setZoom(1);
-    setIsOpen(true);
-  }
+ function openViewer() {
+  setZoom(1);
 
-  function closeViewer() {
-    setZoom(1);
-    setIsOpen(false);
-  }
+  // Guarda a posição atual da página
+  const scrollY = window.scrollY;
+
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.left = "0";
+  document.body.style.right = "0";
+  document.body.style.width = "100%";
+
+  setIsOpen(true);
+}
+
+function closeViewer() {
+  setZoom(1);
+  setIsOpen(false);
+
+  // Recupera a posição antiga
+  const scrollY = Math.abs(parseInt(document.body.style.top || "0"));
+
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.left = "";
+  document.body.style.right = "";
+  document.body.style.width = "";
+
+  window.scrollTo(0, scrollY);
+}
 
   function handleWheel(e) {
     e.preventDefault();

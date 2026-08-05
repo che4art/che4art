@@ -7,7 +7,7 @@ const cursorPointer = 'url("/cursor/pointing.png"), pointer';
 export default function GalleryViewer() {
     const artworks = [
         {
-            src: "/arts-img/gueste.png",
+            src: "/arts-img/gueste.webp",
             title: "the mirror",
             description: "",
 
@@ -17,7 +17,7 @@ export default function GalleryViewer() {
         },
 
         {
-            src: "/arts-img/martyr.png",
+            src: "/arts-img/martyr.webp",
             title: "martyr",
             description: "",
 
@@ -27,7 +27,7 @@ export default function GalleryViewer() {
         },
 
           {
-            src: "/arts-img/gaylitlefanart.png",
+            src: "/arts-img/gaylitlefanart.webp",
             title: "make a name for yourself",
             description: "",
 
@@ -37,7 +37,7 @@ export default function GalleryViewer() {
         },
 
           {
-            src: "/arts-img/ohhhSooScary.png",
+            src: "/arts-img/ohhhSooScary.webp",
             title: "...",
             description: "",
 
@@ -47,7 +47,7 @@ export default function GalleryViewer() {
         },
 
          {
-            src: "/arts-img/tetos.png",
+            src: "/arts-img/tetos.webp",
             title: "TETOS",
             description: "",
 
@@ -57,7 +57,7 @@ export default function GalleryViewer() {
         },
 
          {
-            src: "/arts-img/vocalrune.png",
+            src: "/arts-img/vocalrune.webp",
             title: "vocalrune",
             description: "",
 
@@ -67,8 +67,18 @@ export default function GalleryViewer() {
         },
 
          {
-            src: "/arts-img/comm11-completo.png",
+            src: "/arts-img/comm11-completo.webp",
             title: "witch",
+            description: "",
+
+            mascot: "/mascot/happy.gif",
+            speech: "Another speech...",
+            position: "top",
+        },
+
+          {
+            src: "/arts-img/desenhoDivertidodoDavi44.png",
+            title: "natalya",
             description: "",
 
             mascot: "/mascot/happy.gif",
