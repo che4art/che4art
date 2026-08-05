@@ -45,6 +45,11 @@ const AudioPlayer = forwardRef((props, ref) => {
       cover: "/songs-img/templace.png",
       name: "Impostor Syndrome",
     },
+      {
+      src: "/songs/32_Cutie_Mew_Mew_Magic_DELTARUNE.wav",
+      cover: "/songs-img/templace.png",
+      name: "cutie mew mew magic",
+    },
   ];
 
   const playMusic = () => {

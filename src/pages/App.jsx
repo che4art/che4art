@@ -18,14 +18,14 @@ const App = () => {
 
             {/* C4-1 */}
             <div className="c4-1">
-              <img src="/c4-1.gif" alt="" className="img-d" />
+              <img src="/boxFullOfc4/c4-1.gif" alt="" className="img-d" />
             </div>
 
             <div
               className="c4-2"
               onClick={() => audioPlayerRef.current?.playMusic()}
             >
-              <img src="/c4-2.gif" alt="" className="img-d" />
+              <img src="/boxFullOfc4/c4-2.gif" alt="" className="img-d" />
             </div>
 
 
