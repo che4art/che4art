@@ -150,7 +150,7 @@ export default function GalleryViewer() {
                             style={{
                                 maxWidth: "100%",
                                 maxHeight: "550px",
-                                cursor: 'url("/cursor/zoom-in.png"), zoom-in',
+                               cursor: 'url("/cursor/zoom-in.png") 19 19, zoom-in',
                             }}
                         />
                     </div>
@@ -177,8 +177,8 @@ export default function GalleryViewer() {
                                     cursor: cursorPointer,
                                     border:
                                         index === current
-                                            ? "3px solid white"
-                                            : "2px solid gray",
+                                            ? "1px solid white"
+                                            : "2px solid transparent ",
                                     transition: ".15s",
                                 }}
                             />

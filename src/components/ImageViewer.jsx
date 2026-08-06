@@ -154,7 +154,7 @@ function closeViewer() {
 
                   border: "1px solid #fdfcfd",
 
-                  cursor: 'url("/cursor/pointing.png"), pointer',
+                 cursor: 'url("/cursor/pointing.png") 19 1, pointer',
 
                   fontSize: "18px",
 

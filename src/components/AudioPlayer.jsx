@@ -3,12 +3,24 @@ import InterfaceSite from "./InterfaceSite";
 
 const AudioPlayer = forwardRef((props, ref) => {
   const audioRef = useRef(null);
-  const lastIndexRef = useRef(-1);
+  const playQueueRef = useRef([]);
 
   const [currentTrack, setCurrentTrack] = useState(null);
   const [showPlayer, setShowPlayer] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
-
+const [volumeLevel, setVolumeLevel] = useState(0.15);
+  const colors = [
+    "#4bb9ae",
+    "#57c2bc",
+    "#62bbca",
+    "#6baada",
+    "#6b9add",
+    "#6b8eda",
+    "#697de7",
+    "#666be8",
+    "#5c51de",
+    "#8f37d0",
+];
   const playlist = [
     {
       src: "/songs/cheap-properties.wav",
@@ -50,7 +62,58 @@ const AudioPlayer = forwardRef((props, ref) => {
       cover: "/songs-img/templace.png",
       name: "cutie mew mew magic",
     },
+     {
+      src: "/songs/Sansara.wav",
+      cover: "/songs-img/templace.png",
+      name: "Sansara",
+    },
+       {
+      src: "/songs/AutoCorrection.wav",
+      cover: "/songs-img/templace.png",
+      name: "AutoCorrection",
+    },
+         {
+      src: "/songs/Dear.wav",
+      cover: "/songs-img/templace.png",
+      name: "Dear",
+    },
+         {
+      src: "/songs/Don'tLookAtSānbúzhānWithEroticEyes.wav",
+      cover: "/songs-img/templace.png",
+      name: "Don't Look At Sānbúzhān With Erotic Eyes",
+    },
+             {
+      src: "/songs/HymnToADecadentLife.wav",
+      cover: "/songs-img/templace.png",
+      name: "Hymn to a Decadent life",
+    },
+              {
+      src: "/songs/Liardancer.wav",
+      cover: "/songs-img/templace.png",
+      name: "liar dancer",
+    },
+              {
+      src: "/songs/Overcloked.wav",
+      cover: "/songs-img/templace.png",
+      name: "Overcloked",
+    },
+             {
+      src: "/songs/Sosorry.wav",
+      cover: "/songs-img/templace.png",
+      name: "Sosorry",
+    },
   ];
+
+function shufflePlaylist() {
+  const indexes = playlist.map((_, i) => i);
+
+  for (let i = indexes.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+  }
+
+  playQueueRef.current = indexes;
+}
 
   const playMusic = () => {
     const audio = audioRef.current;
@@ -68,16 +131,12 @@ requestAnimationFrame(() => {
   });
 });
 
-    let randomIndex;
-    do {
-      randomIndex = Math.floor(Math.random() * playlist.length);
-    } while (
-      randomIndex === lastIndexRef.current &&
-      playlist.length > 1
-    );
+if (playQueueRef.current.length === 0) {
+  shufflePlaylist();
+}
 
-    lastIndexRef.current = randomIndex;
-    const track = playlist[randomIndex];
+const nextIndex = playQueueRef.current.shift();
+const track = playlist[nextIndex];
 
     setCurrentTrack(track);
 
@@ -87,10 +146,10 @@ requestAnimationFrame(() => {
 
     let volume = 0.02;
     const fade = setInterval(() => {
-      if (volume < 0.15) {
-        volume += 0.01;
-        audio.volume = volume;
-      } else {
+     if (volume < 0.10) {
+    volume += 0.01;
+audio.volume = volume * Math.pow(volumeLevel / 0.15, 2);
+} else {
         clearInterval(fade);
       }
     }, 300);
@@ -134,18 +193,87 @@ requestAnimationFrame(() => {
     }}
   >
     <InterfaceSite>
-      <img
-        src={currentTrack.cover}
-        alt="cover"
+      <div
+    style={{
+        display: "flex",
+        gap: "12px",
+        alignItems: "center",
+    }}
+>
+
+    {/* Barra de volume */}
+
+   <div
+    style={{
+        display: "flex",
+        flexDirection: "column-reverse",
+        gap: "4px",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "19vh",
+    }}
+>
+    {[...Array(10)].map((_, i) => {
+        const active = i < Math.round(volumeLevel * 10);
+
+        return (
+            <div
+                key={i}
+                onClick={(e) => {
+                    e.stopPropagation();
+
+                    const newVolume = (i + 1) / 10;
+
+                    setVolumeLevel(newVolume);
+
+                    if (audioRef.current) {
+                audioRef.current.volume = Math.pow(newVolume, 2.2);
+                    }
+                }}
+             style={{
+    width: "2vh",
+    height: "2vh",
+
+    background: active
+        ? colors[i]
+        : "#2b2b2b",
+    transition: ".1s",
+
+    boxSizing: "border-box",
+}}
+            />
+        );
+    })}
+</div>
+
+    {/* Capa + Nome */}
+
+    <div
         style={{
-          width: "100%",
-          borderRadius: "8px",
-          marginBottom: "8px",
+            flex: 1,
+            textAlign: "center",
         }}
-      />
-      <div style={{ fontSize: "14px" }}>
-        {currentTrack.name}
-      </div>
+    >
+        <img
+            src={currentTrack.cover}
+            alt="cover"
+            style={{
+                width: "100%",
+                marginBottom: "1vh",
+            }}
+        />
+
+        <div
+            style={{
+                fontSize: "14px",
+            }}
+        >
+            {currentTrack.name}
+        </div>
+
+    </div>
+
+</div>
     </InterfaceSite>
   </div>
 </div>
