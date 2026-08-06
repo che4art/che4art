@@ -9,17 +9,18 @@ const AudioPlayer = forwardRef((props, ref) => {
   const [showPlayer, setShowPlayer] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 const [volumeLevel, setVolumeLevel] = useState(0.15);
+const volumeRef = useRef(0.15);
   const colors = [
-    "#4bb9ae",
-    "#57c2bc",
-    "#62bbca",
-    "#6baada",
-    "#6b9add",
-    "#6b8eda",
-    "#697de7",
-    "#666be8",
-    "#5c51de",
-    "#8f37d0",
+    "#9659ff",
+    "#987cfc",
+    "#838ffd",
+    "#82b8fb",
+    "#69d0e7",
+    "#82e4f7",
+    "#82f7da",
+    "#82f7b2",
+    "#82f79b",
+    "#a4ffa1",
 ];
   const playlist = [
     {
@@ -140,19 +141,26 @@ const track = playlist[nextIndex];
 
     setCurrentTrack(track);
 
-    audio.src = track.src;
-    audio.volume = 0;
-    audio.play();
+audio.pause();
+audio.currentTime = 0;
 
-    let volume = 0.02;
-    const fade = setInterval(() => {
-     if (volume < 0.10) {
-    volume += 0.01;
-audio.volume = volume * Math.pow(volumeLevel / 0.15, 2);
-} else {
-        clearInterval(fade);
-      }
-    }, 300);
+audio.src = track.src;
+audio.volume = 0;
+audio.play();
+
+const targetVolume = Math.pow(volumeRef.current, 2.2);
+
+let volume = 0;
+const fade = setInterval(() => {
+  volume += targetVolume / 10;
+
+  if (volume >= targetVolume) {
+    volume = targetVolume;
+    clearInterval(fade);
+  }
+
+  audio.volume = volume;
+}, 150);
 
     // ⏱️ depois de 1s, sobe rápido
     setTimeout(() => {
@@ -224,11 +232,12 @@ audio.volume = volume * Math.pow(volumeLevel / 0.15, 2);
 
                     const newVolume = (i + 1) / 10;
 
-                    setVolumeLevel(newVolume);
+                  setVolumeLevel(newVolume);
+volumeRef.current = newVolume;
 
-                    if (audioRef.current) {
-                audioRef.current.volume = Math.pow(newVolume, 2.2);
-                    }
+if (audioRef.current) {
+    audioRef.current.volume = Math.pow(newVolume, 2.2);
+}
                 }}
              style={{
     width: "2vh",

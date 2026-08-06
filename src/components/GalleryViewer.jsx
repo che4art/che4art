@@ -2,7 +2,7 @@ import { useState } from "react";
 import ImageViewer from "./ImageViewer";
 import InterfaceSite from "./InterfaceSite"; // ajuste o caminho conforme a localização real do componente
 
-const cursorPointer = 'url("/cursor/pointing.png"), pointer';
+const cursorPointer =  'url(/cursor/pointing.png) 16 0, auto';
 
 export default function GalleryViewer() {
     const artworks = [
@@ -174,7 +174,7 @@ export default function GalleryViewer() {
                                     width: "90px",
                                     height: "90px",
                                     objectFit: "cover",
-                                    cursor: cursorPointer,
+                                    cursor: "url(/cursor/pointing.png) 16 0, auto",
                                     border:
                                         index === current
                                             ? "1px solid white"
