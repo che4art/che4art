@@ -1,20 +1,34 @@
 // src/App.jsx
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import InterfaceSite from "../components/InterfaceSite";
 import AudioPlayer from "../components/AudioPlayer";
 import BrokenButton from "../components/brokenButton";
 import ImageViewer from "../components/ImageViewer";
 import GalleryViewer from "../components/GalleryViewer";
+import Door from "../components/Door";
+import OCDoorsModal from "../components/OCDoorsModal";
+
 
 
 const App = () => {
   const audioPlayerRef = useRef(null);
-
+const [showOCDoors, setShowOCDoors] = useState(false);
   return (
     <>
       <div className="scale-wrapper">
         <div className="container text-center">
-          <div className="container-relative">
+     <div className="container-relative">
+
+  {showOCDoors && (
+    <OCDoorsModal
+      onClose={() => setShowOCDoors(false)}
+    />
+  )}
+
+  {/* porta das ocs */}
+  <div className="door-site">
+    <Door onOpen={() => setShowOCDoors(true)} />
+  </div>
 
             {/* C4-1 */}
             <div className="c4-1">

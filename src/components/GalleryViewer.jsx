@@ -85,6 +85,15 @@ export default function GalleryViewer() {
             speech: "Another speech...",
             position: "top",
         },
+            {
+            src: "/arts-img/pink.webp",
+            title: "BEST CHARACTER OF DELTARUNE, CHANGE MY MIND",
+            description: "",
+
+            mascot: "/mascot/happy.gif",
+            speech: "Another speech...",
+            position: "top",
+        },
     ];
     const [current, setCurrent] = useState(0);
 
