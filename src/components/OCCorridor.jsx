@@ -22,7 +22,7 @@ export default function OCCorridor({ onSelectRoom }) {
     {
       id: 4,
       name: "c4",
-      image: "/oc-rooms/door4.png",
+      image: "/ocRooms/DoorChe4.png",
     },
   ];
 
