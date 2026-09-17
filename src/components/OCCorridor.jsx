@@ -7,12 +7,12 @@ export default function OCCorridor({ onSelectRoom }) {
     {
       id: 1,
       name: "Mustard & ketchup",
-      image: "/oc-rooms/door1.png",
+      image: "/ocRooms/DoorMustardKetchup.png",
     },
     {
       id: 2,
       name: "Lurien",
-      image: "/oc-rooms/door2.png",
+      image: "/ocRooms/Door2.png",
     },
     {
       id: 3,
