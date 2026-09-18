@@ -42,14 +42,14 @@ export default function OCCorridor({ onSelectRoom }) {
       {/* Corredor */}
       <div
         style={{
-          width: "95%",
+          width: "94%",
           height: "85%",
 
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
 
-          gap: "10vh",
+          gap: "5vh",
         }}
       >
         {doors.map((door) => (
@@ -61,8 +61,8 @@ export default function OCCorridor({ onSelectRoom }) {
             style={{
               position: "relative",
 
-              width: "20%",
-              height: "80%",
+              width: "30%",
+              height: "90%",
             backgroundColor: "blue",
               cursor:
                 'url("/cursor/pointing.png") 8 2, pointer',
