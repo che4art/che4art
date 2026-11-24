@@ -1,23 +1,22 @@
-
 import { useEffect } from "react";
-import Sketchbook from "./sketchbook";
-
+import Sketchbook from "./Sketchbook";
+ 
 export default function SketchbookModal({ onClose }) {
-
+ 
   useEffect(() => {
     function handleKeyDown(e) {
       if (e.key === "Escape") {
         onClose();
       }
     }
-
+ 
     window.addEventListener("keydown", handleKeyDown);
-
+ 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);
-
+ 
   return (
     <div
       onClick={onClose}
@@ -32,7 +31,7 @@ export default function SketchbookModal({ onClose }) {
         animation: "fadeIn .2s",
       }}
     >
-
+ 
       {/* Janela */}
       <div
         onClick={(e) => e.stopPropagation()}
@@ -49,7 +48,7 @@ export default function SketchbookModal({ onClose }) {
           position: "relative",
         }}
       >
-
+ 
         {/* Barra superior */}
         <div
           style={{
@@ -67,7 +66,7 @@ export default function SketchbookModal({ onClose }) {
           <span style={{ padding: "0 15px" }}>
             my sketchbook
           </span>
-
+ 
           <button
             onClick={onClose}
             style={{
@@ -82,7 +81,7 @@ export default function SketchbookModal({ onClose }) {
             ✕
           </button>
         </div>
-
+ 
         {/* Conteúdo */}
         <div
           style={{
@@ -96,7 +95,7 @@ export default function SketchbookModal({ onClose }) {
         >
           <Sketchbook />
         </div>
-
+ 
       </div>
     </div>
   );
