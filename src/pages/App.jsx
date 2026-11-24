@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import InterfaceSite from "../components/InterfaceSite";
 import AudioPlayer from "../components/AudioPlayer";
-import BrokenButton from "../components/brokenbutton";
+import BrokenButton from "../components/boke";
 import ImageViewer from "../components/ImageViewer";
 import GalleryViewer from "../components/GalleryViewer";
 import Door from "../components/Door";
