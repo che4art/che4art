@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import ImageViewer from "./ImageViewer";
 
@@ -47,7 +46,7 @@ const pages = [
   },
   {
     left: {
-      src: "/ocRooms/DoorMustardKetchup.png",
+      src: "/davajones.mp4",
       title: "Vocalrune",
       date: "10/05/2026",
     },
@@ -255,9 +254,32 @@ export default function Sketchbook() {
           gap: 8px;
         }
 
-        .sketch-artwork img {
-          flex: 1;
+        /* Área reservada para a arte (tudo que sobra da página, menos a data).
+           O tamanho dela é fixo, então a imagem sempre sabe o limite que
+           não pode passar, em qualquer navegador. */
+        .sketch-artwork .artwork-frame {
+          position: relative;
+          flex: 1 1 0;
           min-height: 0;
+          width: 100%;
+          display: block;
+          border: none; /* a borda agora fica na própria imagem/vídeo */
+        }
+
+        /* A imagem/vídeo é centralizada na área e só ENCOLHE para caber
+           (mantém a proporção, não achata). A borda cola na arte. */
+        .sketch-artwork .artwork-frame img,
+        .sketch-artwork .artwork-frame video {
+          position: absolute;
+          inset: 0;
+          margin: auto;
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
+          object-fit: contain;
+          border: 3px solid #ffd2bb; /* cor da borda */
+          box-sizing: border-box;
         }
 
         .sketch-date {

@@ -1,5 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import InterfaceSite from "./InterfaceSite";
+
+// Detecta se o arquivo é vídeo pela extensão
+const VIDEO_REGEX = /\.(mp4|webm|mov|m4v|ogv)(\?.*)?$/i;
 
 export default function ImageViewer({
   src,
@@ -12,6 +15,22 @@ export default function ImageViewer({
   const [isOpen, setIsOpen] = useState(false);
   const [zoom, setZoom] = useState(1);
   const [origin, setOrigin] = useState("50% 50%");
+
+  const isVideo = VIDEO_REGEX.test(src);
+  const thumbVideoRef = useRef(null);
+
+  // Pausa o vídeo pequeno enquanto a visão grande está aberta
+  // (evita dois vídeos rodando ao mesmo tempo) e retoma ao fechar.
+  useEffect(() => {
+    const video = thumbVideoRef.current;
+    if (!video) return;
+
+    if (isOpen) {
+      video.pause();
+    } else {
+      video.play().catch(() => {});
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     function handleKeyDown(e) {
@@ -88,18 +107,37 @@ function closeViewer() {
 
   return (
     <>
-      {/* Imagem pequena */}
-      <img
-        src={src}
-        alt={alt}
-        className={className}
-        style={{
-         cursor: 'url("/cursor/zoom-in.png"), zoom-in',
-          display: "block",
-          ...style,
-        }}
-        onClick={openViewer}
-      />
+      {/* Miniatura (imagem ou vídeo) */}
+      {isVideo ? (
+        <video
+          ref={thumbVideoRef}
+          src={src}
+          className={className}
+          style={{
+            cursor: 'url("/cursor/zoom-in.png"), zoom-in',
+            display: "block",
+            ...style,
+          }}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          onClick={openViewer}
+        />
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          className={className}
+          style={{
+            cursor: 'url("/cursor/zoom-in.png"), zoom-in',
+            display: "block",
+            ...style,
+          }}
+          onClick={openViewer}
+        />
+      )}
 
       {isOpen && (
         <div
@@ -181,27 +219,47 @@ function closeViewer() {
     position: "relative",
   }}
 >
-  <img
-    src={src}
-    alt={alt}
-    draggable={false}
-    style={{
-      maxWidth: "90%",
-      maxHeight: "90%",
-      width: "auto",
-      height: "auto",
+  {isVideo ? (
+    // Visão grande: vídeo COM áudio e com controles
+    // (o clique para abrir conta como interação do usuário,
+    // então o navegador permite tocar com som)
+    <video
+      src={src}
+      autoPlay
+      loop
+      controls
+      playsInline
+      style={{
+        maxWidth: "90%",
+        maxHeight: "90%",
+        width: "auto",
+        height: "auto",
+        objectFit: "contain",
+      }}
+    />
+  ) : (
+    <img
+      src={src}
+      alt={alt}
+      draggable={false}
+      style={{
+        maxWidth: "90%",
+        maxHeight: "90%",
+        width: "auto",
+        height: "auto",
 
-      objectFit: "contain",
+        objectFit: "contain",
 
-      transform: `scale(${zoom})`,
-      transformOrigin: origin,
+        transform: `scale(${zoom})`,
+        transformOrigin: origin,
 
-      transition: "transform .08s linear",
+        transition: "transform .08s linear",
 
-      userSelect: "none",
-      pointerEvents: "none",
-    }}
-  />
+        userSelect: "none",
+        pointerEvents: "none",
+      }}
+    />
+  )}
 </div>
 
 {/* Texto inferior */}
