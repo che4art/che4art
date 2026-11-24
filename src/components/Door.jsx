@@ -14,7 +14,7 @@ export default function Door({ onOpen }) {
       }
 
       setIsOpening(false);
-    }, 900);
+    }, 1100);
   }
 
   return (
