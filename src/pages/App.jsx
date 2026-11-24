@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import InterfaceSite from "../components/InterfaceSite";
 import AudioPlayer from "../components/AudioPlayer";
-import BrokenButton from "../components/brokenbutton";
+import BrokenButton from "../components/brokenButton";
 import ImageViewer from "../components/ImageViewer";
 import GalleryViewer from "../components/GalleryViewer";
 import Door from "../components/Door";
@@ -58,8 +58,8 @@ const App = () => {
 
                 <InterfaceSite>
                   <p>
-                    Hello,i am che4inho7, but just <br />
-                    call me c4 to be more easy
+                    Hello,i am che4inha7, but just <br />
+                    call me cherry to be more easy
                   </p>
                 </InterfaceSite>
                 <br />
