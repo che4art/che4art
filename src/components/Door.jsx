@@ -43,6 +43,8 @@ export default function Door({ onOpen }) {
           display: "block",
           userSelect: "none",
           pointerEvents: "none",
+          marginLeft: "10vh" ,
+          top: "10vh",
 
         }}
       />
