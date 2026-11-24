@@ -21,8 +21,8 @@ export default function Door({ onOpen }) {
     <div
       style={{
         position: "relative",
-        width: "500px",
-        height: "400px",
+        width: "400px",
+        height: "425px",
         userSelect: "none",
       }}
     >
@@ -30,8 +30,8 @@ export default function Door({ onOpen }) {
       <img
         src={
           isOpening
-            ? "/boxFullOfc4/door-opening.gif"
-            : "/boxFullOfc4/door.gif"
+            ? "/boxFullOfc4/sketchbooksite-opening.gif"
+            : "/boxFullOfc4/sketchbooksite.gif"
         }
         alt="Door"
         draggable={false}
@@ -43,6 +43,7 @@ export default function Door({ onOpen }) {
           display: "block",
           userSelect: "none",
           pointerEvents: "none",
+
         }}
       />
 
@@ -51,12 +52,14 @@ export default function Door({ onOpen }) {
         onClick={handleClick}
         style={{
           position: "absolute",
-
-          left: "26vh",
-          top: "5vh",
-          width: "24vh",
-          height: "36vh",
+          background: "",
+          left: "23vh",
+          top: "23vh",
+          width: "35vh",
+          height: "35vh",
           cursor: 'url("/cursor/pointing.png") 8 2, pointer',
+
+          
         }}
       />
     </div>

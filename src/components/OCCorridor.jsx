@@ -11,18 +11,18 @@ export default function OCCorridor({ onSelectRoom }) {
     },
     {
       id: 2,
-      name: "Lurien",
-      image: "/ocRooms/Door2.png",
-    },
-    {
-      id: 3,
-      name: "Elenor",
+   name: "Elenor",
       image: "/ocRooms/DoorElenor.png",
     },
     {
-      id: 4,
-      name: "c4",
+      id: 3,
+           name: "che4",
       image: "/ocRooms/DoorChe4.png",
+    },
+    {
+      id: 4,
+       name: "Lurien",
+      image: "/ocRooms/DoorLurien.gif",
     },
   ];
 

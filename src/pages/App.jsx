@@ -2,22 +2,25 @@
 import { useRef, useState } from "react";
 import InterfaceSite from "../components/InterfaceSite";
 import AudioPlayer from "../components/AudioPlayer";
-import BrokenButton from "../components/brokenButton";
+import BrokenButton from "../components/brokenbutton";
 import ImageViewer from "../components/ImageViewer";
 import GalleryViewer from "../components/GalleryViewer";
 import Door from "../components/Door";
 import OCDoorsModal from "../components/OCDoorsModal";
-
-
+import SketchbookModal from "../components/SketchbookModal";
 
 const App = () => {
   const audioPlayerRef = useRef(null);
-const [showOCDoors, setShowOCDoors] = useState(false);
+
+  const [showOCDoors, setShowOCDoors] = useState(false);
+  const [showSketchbook, setShowSketchbook] = useState(false);
+
   return (
     <>
       <div className="scale-wrapper">
         <div className="container text-center">
      <div className="container-relative">
+<div className="container-relative">
 
   {showOCDoors && (
     <OCDoorsModal
@@ -25,13 +28,19 @@ const [showOCDoors, setShowOCDoors] = useState(false);
     />
   )}
 
+  {showSketchbook && (
+    <SketchbookModal
+      onClose={() => setShowSketchbook(false)}
+    />
+  )}
+
   {/* porta das ocs */}
   <div className="door-site">
-    <Door onOpen={() => setShowOCDoors(true)} />
+    <Door onOpen={() => setShowSketchbook(true)} />
   </div>
 
-            {/* C4-1 */}
-            <div className="c4-1">
+  {/* C4-1 */}
+  <div className="c4-1">
               <img src="/boxFullOfc4/c4-1.gif" alt="" className="img-d" />
             </div>
 
@@ -77,6 +86,7 @@ const [showOCDoors, setShowOCDoors] = useState(false);
                     Deltarune<br />
                     Jamiroquai<br />
                     Hollow knight<br />
+                    Endacopia<br />
                   </p>
                 </InterfaceSite>
                 <br />
@@ -160,10 +170,7 @@ const [showOCDoors, setShowOCDoors] = useState(false);
                   <img src="/no_wegas.png" alt="" />
                 </div>
 
-                <InterfaceSite>
-                  Hey look at me: <br />
-                  <img src="/no_wegas.png" alt="" />
-                </InterfaceSite>
+      
 
                 <br /><br />
 
@@ -179,6 +186,7 @@ const [showOCDoors, setShowOCDoors] = useState(false);
 
           </div>
         </div>
+      </div>
       </div>
     </>
   );
