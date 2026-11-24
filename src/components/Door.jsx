@@ -22,7 +22,7 @@ export default function Door({ onOpen }) {
       style={{
         position: "relative",
         width: "400px",
-        height: "425px",
+        height: "400px",
         userSelect: "none",
       }}
     >
@@ -56,7 +56,7 @@ export default function Door({ onOpen }) {
           left: "23vh",
           top: "23vh",
           width: "35vh",
-          height: "35vh",
+          height: "30vh",
           cursor: 'url("/cursor/pointing.png") 8 2, pointer',
 
           
