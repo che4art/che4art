@@ -1,6 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import ImageViewer from "./ImageViewer";
 
+// Cada arte (left / right) aceita:
+//   src: "/arts-img/a.webp"                       → uma imagem ou vídeo
+//   src: ["/arts-img/a.webp", "/arts-img/b.webp"] → galeria (vários numa só arte)
+// A data precisa estar no formato "dd/mm/aaaa" para a barra de meses funcionar.
 const pages = [
   {
     left: {
@@ -11,7 +15,7 @@ const pages = [
     right: {
       src: "/arts-img/martyr.webp",
       title: "Martyr",
-      date: "12/02/2026",
+      date: "12/01/2026",
     },
 
     // Capa normal
@@ -58,10 +62,65 @@ const pages = [
 
     cover: "/caderno.png",
   },
+    {
+    left: {
+      src: ["/no_wegas.png", "/no_wegas.png"],
+      title: "Vocalrune",
+      date: "10/05/2026",
+    },
+    right: {
+      src: "/Screenshot 2026-10-09 143429.png",
+      title: "Pink",
+      date: "22/06/2026",
+    },
+
+    cover: "/caderno.png",
+  },
 ];
+
+// Nomes dos botões de mês (troque aqui se quiser outro idioma)
+const MONTHS = [
+  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+];
+
+// Lê datas no formato "dd/mm/aaaa" e devolve { month: 0-11, year }
+function parseDate(text) {
+  const match = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec((text || "").trim());
+  if (!match) return null;
+
+  const month = Number(match[2]) - 1;
+  if (month < 0 || month > 11) return null;
+
+  return { month, year: Number(match[3]) };
+}
+
+// Datas (já lidas) das duas artes de uma página dupla
+function datesOfPage(page) {
+  return [page.left, page.right]
+    .map((art) => parseDate(art?.date))
+    .filter(Boolean);
+}
+
+// Para cada ano+mês, guarda a PRIMEIRA página dupla onde ele aparece.
+// Ex.: { "2026-4": 2 }  →  maio de 2026 está na página dupla 2
+const monthIndex = {};
+pages.forEach((page, pageIndex) => {
+  datesOfPage(page).forEach(({ month, year }) => {
+    const key = `${year}-${month}`;
+    if (monthIndex[key] === undefined) monthIndex[key] = pageIndex;
+  });
+});
+
+const years = [
+  ...new Set(Object.keys(monthIndex).map((key) => Number(key.split("-")[0]))),
+].sort((a, b) => a - b);
 
 export default function Sketchbook() {
   const [currentPage, setCurrentPage] = useState(0);
+  const [viewYear, setViewYear] = useState(
+    () => datesOfPage(pages[0])[0]?.year ?? years[0]
+  );
   const [isTurning, setIsTurning] = useState(false);
   const [turnDirection, setTurnDirection] = useState(null);
 
@@ -72,25 +131,44 @@ export default function Sketchbook() {
     return () => clearTimeout(timer.current);
   }, []);
 
-  function turnPage(direction) {
+  // Se a página atual não tem nada do ano que a barra está mostrando,
+  // a barra pula para o ano da página atual.
+  useEffect(() => {
+    const pageYears = datesOfPage(pages[currentPage]).map((d) => d.year);
+
+    if (pageYears.length && !pageYears.includes(viewYear)) {
+      setViewYear(pageYears[0]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
+
+  // Vai para qualquer página dupla (uma virada de página só, mesmo que
+  // o pulo seja grande), na direção certa.
+  function goToPage(target) {
     if (isTurning) return;
+    if (target === currentPage) return;
+    if (target < 0 || target >= pages.length) return;
 
-    const next = currentPage + direction;
-
-    if (next < 0 || next >= pages.length) return;
+    const direction = target > currentPage ? 1 : -1;
 
     setTurnDirection(direction);
     setIsTurning(true);
 
     timer.current = setTimeout(() => {
-      setCurrentPage(next);
+      setCurrentPage(target);
       setIsTurning(false);
       setTurnDirection(null);
     }, animationDuration);
   }
 
+  function turnPage(direction) {
+    goToPage(currentPage + direction);
+  }
+
   function renderArtwork(art) {
   if (!art) return null;
+
+  const imageCount = Array.isArray(art.src) ? art.src.length : 1;
 
   return (
     <div className="sketch-artwork">
@@ -112,12 +190,22 @@ export default function Sketchbook() {
         />
       </div>
 
-      <p className="sketch-date">{art.date}</p>
+      <p className="sketch-date">
+        {art.date}
+        {imageCount > 1 && ` · ${imageCount} images`}
+      </p>
     </div>
   );
 }
 
   const activePage = pages[currentPage];
+
+  // Meses que aparecem na página dupla aberta (ficam destacados)
+  const visibleMonths = new Set(
+    datesOfPage(activePage).map(({ month, year }) => `${year}-${month}`)
+  );
+
+  const yearPosition = years.indexOf(viewYear);
 
   // Durante a animação, usa o GIF correspondente à direção.
   // Quando está parado, usa a capa configurada para a página.
@@ -185,10 +273,62 @@ export default function Sketchbook() {
 
       </div>
 
+      {/* Barra de meses */}
+      {years.length > 0 && (
+        <nav className="month-bar" aria-label="Meses">
+          {years.length > 1 && (
+            <div className="year-picker">
+              <button
+                className="year-button"
+                onClick={() => setViewYear(years[yearPosition - 1])}
+                disabled={yearPosition <= 0}
+                aria-label="Ano anterior"
+              >
+                ‹
+              </button>
+
+              <span>{viewYear}</span>
+
+              <button
+                className="year-button"
+                onClick={() => setViewYear(years[yearPosition + 1])}
+                disabled={yearPosition >= years.length - 1}
+                aria-label="Próximo ano"
+              >
+                ›
+              </button>
+            </div>
+          )}
+
+          <div className="month-grid">
+            {MONTHS.map((label, month) => {
+              const key = `${viewYear}-${month}`;
+              const target = monthIndex[key];
+              const hasArt = target !== undefined;
+              const isActive = visibleMonths.has(key);
+
+              return (
+                <button
+                  key={label}
+                  className={`month-button ${isActive ? "active" : ""}`}
+                  onClick={() => goToPage(target)}
+                  disabled={!hasArt || isTurning}
+                  aria-current={isActive ? "page" : undefined}
+                  title={hasArt ? `${label} ${viewYear}` : "No drawings"}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </nav>
+      )}
+
       <style>{`
         .sketchbook-container {
           width: 100%;
           display: flex;
+          flex-direction: column;
           justify-content: center;
           align-items: center;
         }
@@ -198,7 +338,6 @@ export default function Sketchbook() {
           width: 85%;
           max-width: 850px;
           aspect-ratio: 1280 / 1290;
-          margin-bottom: 5%;
         }
 
         .sketchbook-image {
@@ -268,8 +407,10 @@ export default function Sketchbook() {
 
         /* A imagem/vídeo é centralizada na área e só ENCOLHE para caber
            (mantém a proporção, não achata). A borda cola na arte. */
-        .sketch-artwork .artwork-frame img,
-        .sketch-artwork .artwork-frame video {
+        /* ">" = só a miniatura (filho direto). Assim a visão grande,
+           que também fica dentro do quadro, não pega a borda. */
+        .sketch-artwork .artwork-frame > img,
+        .sketch-artwork .artwork-frame > video {
           position: absolute;
           inset: 0;
           margin: auto;
@@ -297,6 +438,71 @@ export default function Sketchbook() {
           background: transparent;
           border: none;
           z-index: 20;
+        }
+
+        /* ---------- Barra de meses ---------- */
+        .month-bar {
+          width: 85%;
+          max-width: 850px;
+          margin: 8px 0 5%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .month-grid {
+          width: 100%;
+          display: grid;
+          grid-template-columns: repeat(12, 1fr);
+          gap: 4px;
+        }
+
+        .month-button,
+        .year-button {
+          color: #e63db9;
+          border: 1px solid transparent;
+          background:transparent;
+          cursor: url("/cursor/pointing.png") 8 2, pointer;
+        }
+
+        .month-button {
+          padding: 5px 0;
+          font-size: 12px;
+        }
+
+        /* mês da página que está aberta */
+        .month-button.active {
+            background:transparent;
+            color: #ffffff;
+        }
+
+        /* mês sem desenhos (ou virando página) */
+        .month-button:disabled,
+        .year-button:disabled {
+          opacity: 0.35;
+          cursor: default;
+          color: #ab2dff;
+        }
+
+        .year-picker {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #ffffff;
+          font-size: 14px;
+        }
+
+        .year-button {
+          padding: 0 10px;
+          font-size: 18px;
+          line-height: 1.2;
+        }
+
+        @media (max-width: 520px) {
+          .month-grid {
+            grid-template-columns: repeat(6, 1fr);
+          }
         }
 
         .previous-button {
